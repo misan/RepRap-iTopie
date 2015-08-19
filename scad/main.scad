@@ -46,7 +46,7 @@ module plate2() {
 }
 
 // parts module 
-if (output_mode != 4) {
+if (output_mode != 4 && output_mode != 6) {
 
     if (output_type == 0) {
         plate1();
@@ -82,6 +82,7 @@ if (output_mode == 4) {
     rotate([90, 0, 0])
         translate([0, -feet_height, -feet_connectors_margin[2] - feet_connectors_size[1]])
             feet();
+    
     rotate([90, 0, 0])
         translate([0, -feet_height, -horizontal_plate_height + feet_connectors_margin[0]])
             feet();
@@ -94,4 +95,9 @@ if (output_mode == 4) {
         rotate([90, 0, 90])
             triangle();
     }
+}
+
+if(output_mode == 6) {
+     projection (cut=true) { translate([-vertical_plate_width - (parts_margin * 2), 0, 0]) plate2(); plate1(); }
+     projection (cut=true) translate([0,600,-sheet_thickness+0.1]) { translate([-vertical_plate_width - (parts_margin * 2), 0, 0]) splate2(); plate1(); }
 }
